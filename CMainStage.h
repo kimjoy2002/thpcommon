@@ -4,8 +4,6 @@
 #include <windows.h>
 #include "TCHAR.h"
 #include <math.h>
-#include "../include/define.h"
-#include "../include/types.h"
 #include "util.h"
 #include <png.h>
 #include <map>
@@ -75,14 +73,14 @@ public:
 	// range							: 半径
 	// return							: 見つかったらTRUE
 	BOOL FindGroundDown(D3DXVECTOR2* dest_my_pos, D3DXVECTOR2* dest_ground_pos, D3DXVECTOR2* first_pos, int range);
-	// 地表を探す
+	// 地?を探す
 	// dest_my_pos					: 見つかった自分の位置
 	// dest_ground_pos			: 見つかった接地位置
 	// first_pos						: 探し始めの位置
 	// range							: 半径
 	// return							: 見つかったらTRUE
 	BOOL FindGroundUp(D3DXVECTOR2* dest_my_pos, D3DXVECTOR2* dest_ground_pos, D3DXVECTOR2* first_pos, int range);
-	// 地表を探す
+	// 地?を探す
 	// dest_my_pos					: 見つかった自分の位置
 	// dest_ground_pos			: 見つかった接地位置
 	// first_pos						: 探し始めの位置
@@ -96,12 +94,12 @@ public:
 	// return	: 1ピクセル以上削除されたか
 	int EraseStage(D3DXVECTOR2* pos, int range);
 
-	// ステージへ画像貼り付け
+	// ステ?ジへ画像?り付け
 	BOOL PasteImage(CFiler* pFiler, WCHAR *path, RECT* pImageRect, int nStageOrignX, int nStageOrignY);
-	// ステージへ画像貼り付け
+	// ステ?ジへ画像?り付け
 	BOOL PasteImage(LPDIRECT3DDEVICE9 pDev, RECT* pImageRect, int nStageOrignX, int nStageOrignY, LPDIRECT3DTEXTURE9 pCopyTexture);
 
-	// 読み込んであるPNGイメージからテクスチャ作成
+	// 読み込んであるPNGイメ?ジからテクス?ャ作成
 	BOOL CreateTexture(LPDIRECT3DDEVICE9 pDev, LPDIRECT3DTEXTURE9 *ppCreatedTexture);
 
 	inline int GetWidth()	{	return m_tPngImage.width;	};

@@ -5,8 +5,6 @@
 
 #include "windows.h"
 #include <cassert>
-#include "../include/define.h"
-#include "../include/types.h"
 #include "util.h"
 
 class CPacketQueue;

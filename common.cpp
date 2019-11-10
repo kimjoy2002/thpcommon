@@ -58,14 +58,14 @@ BOOL common::EncodeFileHash(const char* path, clx::md5* pmd)
 	if (!buf)
 	{
 		fclose(f);
-		MessageBoxA(NULL, path, "ファイル読み込み失敗", MB_OK);
+		MessageBoxA(NULL, path, "フ?イル読み込み失敗", MB_OK);
 		return FALSE;
 	}
 	if (lSize != fread(buf, 1, lSize, f))
 	{
 		fclose(f);
 		SafeDeleteArray(buf);
-		MessageBoxA(NULL, path, "ファイル読み込み失敗", MB_OK);
+		MessageBoxA(NULL, path, "フ?イル読み込み失敗", MB_OK);
 		return FALSE;
 	}
 	fclose(f);
@@ -112,7 +112,7 @@ BOOL common::scr::LoadAllStageScript(lua_State *pL , LuaHelper* pLuah, std::map 
 
 	pDestMapScrInfo->clear();
 
-	//ファイルの検索
+	//フ?イルの検索
 	_finddata_t	fileinfo;
 	long handle; 
 	char name[_MAX_FNAME*2+1];
@@ -204,15 +204,15 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 	luaResults.Clear();
 	luaParams.Number(num).String(module);
 	int nScrIndex = num;
-	// ステージスクリプトクラス生成
+	// ステ?ジスクリプトクラス生成
 	if (!pLuah->CallFunc("load_StageScript", &luaResults, 1, &luaParams))
 	{
 		SafeDelete(md);
 		const char * pc = pLuah->GetErr();
 		MessageBoxA(NULL, pc, "stage loader", MB_OK);
 		char log[320];
-		SafePrintfA(log, 320, "スクリプトにエラーが見つかりました(%s)\nスクリプトファイルを削除しますか？", path.c_str());
-		if ( MessageBoxA(NULL, log, "ステージスクリプトロードエラー", MB_YESNO)  == IDYES)
+		SafePrintfA(log, 320, "スクリプトにエラ?が見つかりました(%s)\nスクリプトフ?イルを削除しますか？", path.c_str());
+		if ( MessageBoxA(NULL, log, "ステ?ジスクリプトロ?ドエラ?", MB_YESNO)  == IDYES)
 		{
 			DeleteFileA(str_module.c_str());
 			return 0;
@@ -223,7 +223,7 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 	luaParams.Clear();
 	luaResults.Clear();
 
-	// ステージID取得
+	// ステ?ジID取得
 	luaParams.Number(nScrIndex);
 	if (!pLuah->CallFunc("getStage_ID", &luaResults, 2, &luaParams))
 	{
@@ -236,7 +236,7 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 	{
 		SafeDelete(md);
 //		WCHAR msg[64];
-//		SafePrintf(msg, 64, L"範囲外のIDが設定されているステージスクリプトが見つかりました(ID:%d)", nID);
+//		SafePrintf(msg, 64, L"範囲外のIDが設定されているステ?ジスクリプトが見つかりました(ID:%d)", nID);
 //		MessageBox(NULL, msg, L"script loader", MB_OK);
 		return 0;
 	}
@@ -286,17 +286,17 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 	{
 		SafeDelete(md);
 		WCHAR msg[64];
-		SafePrintf(msg, 64, L"不正なステージスクリプトが見つかりました(ID:%d)", nID);
+		SafePrintf(msg, 64, L"不正なステ?ジスクリプトが見つかりました(ID:%d)", nID);
 		MessageBox(NULL, msg, L"script loader", MB_OK);
 		return -1;
 	}
-	// 登録済みIDか確認
+	// 登?済みIDか確認
 	std::map < int, TSTAGE_SCR_INFO >::iterator itfind = pDestMapScrInfo->find(nID);
 	if (itfind != pDestMapScrInfo->end())
 	{
 		SafeDelete(md);
 		WCHAR msg[64];
-		SafePrintf(msg, 64, L"ステージスクリプトに重複IDが見つかりました(ID:%d)", nID);
+		SafePrintf(msg, 64, L"ステ?ジスクリプトに重複IDが見つかりました(ID:%d)", nID);
 		MessageBox(NULL, msg, L"script loader", MB_OK);
 		return -1;
 	}
@@ -304,7 +304,7 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 
 	luaParams.Clear();
 	luaResults.Clear();
-	// ステージ名取得
+	// ステ?ジ名取得
 	luaParams.Number(nScrIndex);
 	if (!pLuah->CallFunc("getStage_Name", &luaResults, 1, &luaParams))
 	{
@@ -327,7 +327,7 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 
 	luaParams.Clear();
 	luaResults.Clear();
-	// ステージサムネイル情報取得
+	// ステ?ジサ?ネイル情報取得
 	luaParams.Number(nScrIndex);
 	if (!pLuah->CallFunc("getStage_ThumnailInfo", &luaResults, 3, &luaParams))
 	{
@@ -357,17 +357,17 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 	{
 		SafeDelete(md);
 		char log[320];
-		SafePrintfA(log, 320, "使用ファイル(%s)が見つかりませんでした。\nロードをスキップします。");
-		MessageBoxA(NULL, log, "ステージスクリプトロードエラー", MB_OK);
-		SafePrintfA(log, 320, "スクリプトファイルを削除しますか？\n%s", path.c_str());
-		if ( MessageBoxA(NULL, log, "ステージスクリプトロードエラー", MB_YESNO)  == IDYES)
+		SafePrintfA(log, 320, "使用フ?イル(%s)が見つかりませんでした。\nロ?ドをスキップします。");
+		MessageBoxA(NULL, log, "ステ?ジスクリプトロ?ドエラ?", MB_OK);
+		SafePrintfA(log, 320, "スクリプトフ?イルを削除しますか？\n%s", path.c_str());
+		if ( MessageBoxA(NULL, log, "ステ?ジスクリプトロ?ドエラ?", MB_YESNO)  == IDYES)
 			DeleteFileA(str_module.c_str());
 		return -1;
 	}
 
 	luaParams.Clear();
 	luaResults.Clear();
-	// ステージ情報取得
+	// ステ?ジ情報取得
 	luaParams.Number(nScrIndex);
 	if (!pLuah->CallFunc("getStage_StageInfo", &luaResults, 3, &luaParams))
 	{
@@ -396,17 +396,17 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 	{
 		SafeDelete(md);
 		char log[320];
-		SafePrintfA(log, 320, "使用ファイル(%s)が見つかりませんでした。\nロードをスキップします。");
-		MessageBoxA(NULL, log, "ステージスクリプトロードエラー", MB_OK);
-		SafePrintfA(log, 320, "スクリプトファイルを削除しますか？\n%s", path.c_str());
-		if ( MessageBoxA(NULL, log, "ステージスクリプトロードエラー", MB_YESNO)  == IDYES)
+		SafePrintfA(log, 320, "使用フ?イル(%s)が見つかりませんでした。\nロ?ドをスキップします。");
+		MessageBoxA(NULL, log, "ステ?ジスクリプトロ?ドエラ?", MB_OK);
+		SafePrintfA(log, 320, "スクリプトフ?イルを削除しますか？\n%s", path.c_str());
+		if ( MessageBoxA(NULL, log, "ステ?ジスクリプトロ?ドエラ?", MB_YESNO)  == IDYES)
 			DeleteFileA(str_module.c_str());
 		return -1;
 	}
 
 	luaParams.Clear();
 	luaResults.Clear();
-	// ステージ情報取得
+	// ステ?ジ情報取得
 	luaParams.Number(nScrIndex);
 	if (!pLuah->CallFunc("getStage_BGInfo", &luaResults, 3, &luaParams))
 	{
@@ -436,15 +436,15 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 	{
 		SafeDelete(md);
 		char log[320];
-		SafePrintfA(log, 320, "使用ファイル(%s)が見つかりませんでした。\nロードをスキップします。");
-		MessageBoxA(NULL, log, "ステージスクリプトロードエラー", MB_OK);
-		SafePrintfA(log, 320, "スクリプトファイルを削除しますか？\n%s", path.c_str());
-		if ( MessageBoxA(NULL, log, "ステージスクリプトロードエラー", MB_YESNO)  == IDYES)
+		SafePrintfA(log, 320, "使用フ?イル(%s)が見つかりませんでした。\nロ?ドをスキップします。");
+		MessageBoxA(NULL, log, "ステ?ジスクリプトロ?ドエラ?", MB_OK);
+		SafePrintfA(log, 320, "スクリプトフ?イルを削除しますか？\n%s", path.c_str());
+		if ( MessageBoxA(NULL, log, "ステ?ジスクリプトロ?ドエラ?", MB_YESNO)  == IDYES)
 			DeleteFileA(str_module.c_str());
 		return -1;
 	}
 
-	// ステージ弾 //
+	// ステ?ジ弾 //
 	// 弾数
 	luaParams.Number(nScrIndex);
 	if (!pLuah->CallFunc("getStage_GetBltTypeCount", &luaResults, 1, &luaParams))
@@ -491,7 +491,7 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 	}
 	scrinfo.se_count = (int)luaResults.GetNumber(0);
 	// 音声のハッシュ値を取得 //
-#if 1	// 音声はサーバ間処理に影響ないのでハッシュ値チェックしない
+#if 1	// 音声はサ?バ間処理に影響ないのでハッシュ値?ェックしない
 	int nSECount = scrinfo.se_count;
 	for (int i=0;i<nSECount;i++)
 	{
@@ -511,10 +511,10 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 		{
 			SafeDelete(md);
 			char log[320];
-			SafePrintfA(log, 320, "使用ファイル(%s)が見つかりませんでした。\nロードをスキップします。");
-			MessageBoxA(NULL, log, "ステージスクリプトロードエラー", MB_OK);
-			SafePrintfA(log, 320, "スクリプトファイルを削除しますか？\n%s", path.c_str());
-			if ( MessageBoxA(NULL, log, "ステージスクリプトロードエラー", MB_YESNO)  == IDYES)
+			SafePrintfA(log, 320, "使用フ?イル(%s)が見つかりませんでした。\nロ?ドをスキップします。");
+			MessageBoxA(NULL, log, "ステ?ジスクリプトロ?ドエラ?", MB_OK);
+			SafePrintfA(log, 320, "スクリプトフ?イルを削除しますか？\n%s", path.c_str());
+			if ( MessageBoxA(NULL, log, "ステ?ジスクリプトロ?ドエラ?", MB_YESNO)  == IDYES)
 				DeleteFileA(str_module.c_str());
 			return -1;
 		}
@@ -522,7 +522,7 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 #endif
 	luaParams.Clear();
 	luaResults.Clear();
-	// ステージBGM情報取得
+	// ステ?ジBGM情報取得
 	luaParams.Number(nScrIndex);
 	if (!pLuah->CallFunc("getStage_GetBGMFile", &luaResults, 1, &luaParams))
 	{
@@ -549,10 +549,10 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 	{
 		SafeDelete(md);
 		char log[320];
-		SafePrintfA(log, 320, "使用ファイル(%s)が見つかりませんでした。\nロードをスキップします。");
-		MessageBoxA(NULL, log, "ステージスクリプトロードエラー", MB_OK);
-		SafePrintfA(log, 320, "スクリプトファイルを削除しますか？\n%s", path.c_str());
-		if ( MessageBoxA(NULL, log, "ステージスクリプトロードエラー", MB_YESNO)  == IDYES)
+		SafePrintfA(log, 320, "使用フ?イル(%s)が見つかりませんでした。\nロ?ドをスキップします。");
+		MessageBoxA(NULL, log, "ステ?ジスクリプトロ?ドエラ?", MB_OK);
+		SafePrintfA(log, 320, "スクリプトフ?イルを削除しますか？\n%s", path.c_str());
+		if ( MessageBoxA(NULL, log, "ステ?ジスクリプトロ?ドエラ?", MB_YESNO)  == IDYES)
 			DeleteFileA(str_module.c_str());
 		return FALSE;
 	}
@@ -575,7 +575,7 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 	scrinfo.scr_index = num;
 #if SCR_HASH_CHECK
 	scrinfo.flg = FALSE;
-#if TRIAL	// ロード時にハッシュ値チェック
+#if TRIAL	// ロ?ド時にハッシュ値?ェック
 #ifndef _DEBUG
 	char *csTriChk = NULL;
 	switch (nID)
@@ -616,7 +616,7 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 		return -1;	// 他IDは追加しない
 	}
 #endif	// _DEBUG
-#endif	// TRIAL	// ロード時にハッシュ値チェック
+#endif	// TRIAL	// ロ?ド時にハッシュ値?ェック
 
 #else	//SCR_HASH_CHECK
 	scrinfo.flg = TRUE;
@@ -633,7 +633,7 @@ BOOL common::scr::LoadAllCharaScript(lua_State *pL , LuaHelper* pLuah, std::map 
 	// Load Lua "loader.lua"
 	pDestMapScrInfo->clear();
 
-	//ファイルの検索
+	//フ?イルの検索
 	_finddata_t	fileinfo;
 	long handle; 
 	char name[_MAX_FNAME*2+1];
@@ -733,8 +733,8 @@ BOOL common::scr::LoadCharaScript(int num, const char* exedir, const char* modul
 		const char * pc = pLuah->GetErr();
 		MessageBoxA(NULL, pc, "loader", MB_OK);
 		char log[320];
-		SafePrintfA(log, 320, "スクリプトにエラーが見つかりました(%s)\nスクリプトファイルを削除しますか？", path.c_str());
-		if ( MessageBoxA(NULL, log, "キャラスクリプトロードエラー", MB_YESNO)  == IDYES)
+		SafePrintfA(log, 320, "スクリプトにエラ?が見つかりました(%s)\nスクリプトフ?イルを削除しますか？", path.c_str());
+		if ( MessageBoxA(NULL, log, "キャラスクリプトロ?ドエラ?", MB_YESNO)  == IDYES)
 		{
 			DeleteFileA(str_module.c_str());
 			return 0;
@@ -813,7 +813,7 @@ BOOL common::scr::LoadCharaScript(int num, const char* exedir, const char* modul
 		MessageBox(NULL, msg, L"script loader", MB_OK);
 		return -1;
 	}
-	// 登録済みIDか確認
+	// 登?済みIDか確認
 	std::map < int, TCHARA_SCR_INFO >::iterator itfind = pDestMapScrInfo->find(nID);
 	if (itfind != pDestMapScrInfo->end())
 	{
@@ -827,7 +827,7 @@ BOOL common::scr::LoadCharaScript(int num, const char* exedir, const char* modul
 
 	luaParams.Clear();
 	luaResults.Clear();
-	// キャラ用テクスチャファイル取得
+	// キャラ用テクス?ャフ?イル取得
 	luaParams.Number(nCharaIndex);
 	if (!pLuah->CallFunc("getChara_TexFile", &luaResults, 1, &luaParams))
 	{
@@ -855,10 +855,10 @@ BOOL common::scr::LoadCharaScript(int num, const char* exedir, const char* modul
 	{
 		SafeDelete(md);
 		char log[320];
-		SafePrintfA(log, 320, "使用ファイル(%s)が見つかりませんでした。\nロードをスキップします。");
-		MessageBoxA(NULL, log, "キャラスクリプトロードエラー", MB_OK);
-		SafePrintfA(log, 320, "スクリプトファイルを削除しますか？\n%s", path.c_str());
-		if ( MessageBoxA(NULL, log, "キャラスクリプトロードエラー", MB_YESNO)  == IDYES)
+		SafePrintfA(log, 320, "使用フ?イル(%s)が見つかりませんでした。\nロ?ドをスキップします。");
+		MessageBoxA(NULL, log, "キャラスクリプトロ?ドエラ?", MB_OK);
+		SafePrintfA(log, 320, "スクリプトフ?イルを削除しますか？\n%s", path.c_str());
+		if ( MessageBoxA(NULL, log, "キャラスクリプトロ?ドエラ?", MB_YESNO)  == IDYES)
 			DeleteFileA(str_module.c_str());
 		return 0;
 	}
@@ -973,7 +973,7 @@ BOOL common::scr::LoadCharaScript(int num, const char* exedir, const char* modul
 
 	luaParams.Clear();
 	luaResults.Clear();
-	// キャラテクスチャ情報取得
+	// キャラテクス?ャ情報取得
 	luaParams.Number(nCharaIndex);
 	if (!pLuah->CallFunc("getChara_DrawSize", &luaResults, 2, &luaParams))
 	{
@@ -987,7 +987,7 @@ BOOL common::scr::LoadCharaScript(int num, const char* exedir, const char* modul
 
 	luaParams.Clear();
 	luaResults.Clear();
-	// キャラテクスチャ情報取得
+	// キャラテクス?ャ情報取得
 	luaParams.Number(nCharaIndex);
 	if (!pLuah->CallFunc("getChara_TexChr", &luaResults, 5, &luaParams))
 	{
@@ -1004,7 +1004,7 @@ BOOL common::scr::LoadCharaScript(int num, const char* exedir, const char* modul
 
 	luaParams.Clear();
 	luaResults.Clear();
-	// キャラテクスチャ情報(弾発射用)取得
+	// キャラテクス?ャ情報(弾発射用)取得
 	luaParams.Number(nCharaIndex);
 	if (!pLuah->CallFunc("getChara_TexTrg", &luaResults, 5, &luaParams))
 	{
@@ -1049,7 +1049,7 @@ BOOL common::scr::LoadCharaScript(int num, const char* exedir, const char* modul
 
 	luaParams.Clear();
 	luaResults.Clear();
-	// スペルカード情報
+	// スペルカ?ド情報
 	luaParams.Number(nCharaIndex);
 	if (!pLuah->CallFunc("getChara_GetSCBaseInfo", &luaResults, 10, &luaParams))
 	{
@@ -1073,7 +1073,7 @@ BOOL common::scr::LoadCharaScript(int num, const char* exedir, const char* modul
 
 	luaParams.Clear();
 	luaResults.Clear();
-	// スペルカード情報
+	// スペルカ?ド情報
 	luaParams.Number(nCharaIndex);
 	if (!pLuah->CallFunc("getChara_GetSCPartInfo", &luaResults, 3, &luaParams))
 	{
@@ -1107,7 +1107,7 @@ BOOL common::scr::LoadCharaScript(int num, const char* exedir, const char* modul
 	}
 	scrinfo.se_count = (int)luaResults.GetNumber(0);
 	// 音声のハッシュ値を取得 //
-#if 1	// 音声はサーバ間処理に影響ないのでハッシュ値チェックしない
+#if 1	// 音声はサ?バ間処理に影響ないのでハッシュ値?ェックしない
 	int nSECount = scrinfo.se_count;
 	for (int i=0;i<nSECount;i++)
 	{
@@ -1127,10 +1127,10 @@ BOOL common::scr::LoadCharaScript(int num, const char* exedir, const char* modul
 		{
 			SafeDelete(md);
 			char log[321];
-			SafePrintfA(log, 320, "使用ファイル(%s)が見つかりませんでした。\nロードをスキップします。", path.c_str());
-			MessageBoxA(NULL, log, "キャラスクリプトロードエラー", MB_OK);
-//			SafePrintfA(log, 320, "スクリプトファイルを削除しますか？\n%s", str_module.c_str());
-//			if ( MessageBoxA(NULL, log, "キャラスクリプトロードエラー", MB_YESNO)  == IDYES)
+			SafePrintfA(log, 320, "使用フ?イル(%s)が見つかりませんでした。\nロ?ドをスキップします。", path.c_str());
+			MessageBoxA(NULL, log, "キャラスクリプトロ?ドエラ?", MB_OK);
+//			SafePrintfA(log, 320, "スクリプトフ?イルを削除しますか？\n%s", str_module.c_str());
+//			if ( MessageBoxA(NULL, log, "キャラスクリプトロ?ドエラ?", MB_YESNO)  == IDYES)
 //				DeleteFileA(str_module.c_str());
 			return 0;
 		}
@@ -1157,7 +1157,7 @@ BOOL common::scr::LoadCharaScript(int num, const char* exedir, const char* modul
 	scrinfo.scr_index = num;
 #if SCR_HASH_CHECK
 	scrinfo.flg = FALSE;
-#if TRIAL	// ロード時にハッシュ値チェック
+#if TRIAL	// ロ?ド時にハッシュ値?ェック
 #ifndef _DEBUG
 	char *csTriChk = NULL;
 	switch (nID)
@@ -1461,7 +1461,7 @@ TCHARA_SCR_INFO* common::scr::FindCharaScrInfoFromCharaType(int chara_type, std:
 	if (itfind == pMapScrInfo->end())
 	{
 #if _DEBUG
-		DXTRACE_MSG(L"スクリプト検索エラー\nFindCharaScrInfo()");
+		DXTRACE_MSG(L"スクリプト検索エラ?\nFindCharaScrInfo()");
 #endif
 		return NULL;
 	}
@@ -1474,7 +1474,7 @@ TSTAGE_SCR_INFO* common::scr::FindStageScrInfoFromStageID(int stage_id, std::map
 	if (itfind == pMapScrInfo->end())
 	{
 #if _DEBUG
-		DXTRACE_MSG(L"スクリプト検索エラー\nFindStageScrInfo()");
+		DXTRACE_MSG(L"スクリプト検索エラ?\nFindStageScrInfo()");
 #endif
 		return NULL;
 	}
@@ -1491,7 +1491,7 @@ TSTAGE_SCR_INFO* common::scr::FindStageScrInfoFromStageIndex(int stage_index, st
 		if (it == pMapScrInfo->end())
 		{
 #if _DEBUG
-			DXTRACE_MSG(L"スクリプト取得エラー\nFindStageScrInfo()");
+			DXTRACE_MSG(L"スクリプト取得エラ?\nFindStageScrInfo()");
 #endif
 			return NULL;
 		}
@@ -1545,7 +1545,7 @@ BOOL common::scr::CallShootingFunc(LuaHelper* pLuah, ptype_session shot_sess, in
 	{
 	case BLT_PROC_TYPE_SCR_CHARA:
 		{
-			// フレーム0なら弾発射によるディレイ値増加
+			// フレ??0なら弾発射によるディレイ値増加
 			if (!nFrame)
 			{
 				// 連射使用時は一回目のディレイ値は計算しない
@@ -1568,7 +1568,7 @@ BOOL common::scr::CallShootingFunc(LuaHelper* pLuah, ptype_session shot_sess, in
 
 	case BLT_PROC_TYPE_SCR_SPELL:
 		{
-			// フレーム0なら弾発射によるディレイ値増加
+			// フレ??0なら弾発射によるディレイ値増加
 			if (!nFrame)
 				shot_sess->delay += pCharaScrInfo->sc_info.blt_delay;
 
@@ -1649,7 +1649,7 @@ E_MOVE_STAGE_RESULT common::chr::MoveOnStage(CMainStage* pStage, ptype_session s
 			bCanMove = FALSE;
 			sess->ay += CHARA_DROP_SPEED;
 			PCHARA_SCR_INFO pCharaScrInfo = (PCHARA_SCR_INFO)sess->scrinfo;
-			// ステージ外確認
+			// ステ?ジ外確認
 			if (sess->ay >= (pStage->GetStageHeight()+pCharaScrInfo->rec_tex_chr.bottom/2) )
 			{
 				sess->ay = (short)(pStage->GetStageHeight()+pCharaScrInfo->rec_tex_chr.bottom);
@@ -1682,7 +1682,7 @@ E_CHARA_GETDOWN_RESULT common::chr::CharaGetDown(CMainStage* pStage, short* px, 
 	D3DXVECTOR2 pos = first_pos;
 	D3DXVECTOR2 dest_my_pos;
 	D3DXVECTOR2 dest_ground_pos;
-	// ステージに当たっているか
+	// ステ?ジに当たっているか
 	BOOL h = pStage->IsSomeHit(&dest_my_pos, &first_pos/*, &hline */,CHARA_BODY_RANGE);	// 初期位置が地中か
 	if (h)
 	{
@@ -1717,8 +1717,8 @@ E_CHARA_GETDOWN_RESULT common::chr::CharaGetDown(CMainStage* pStage, short* px, 
 
 E_MOVE_STAGE_RESULT common::chr::MoveStage(CMainStage* pStage, ptype_session sess, std::map < int, TCHARA_SCR_INFO >* pMapScrInfo)
 {
-//	// 落下死したやつは飛ばす
-// チェック済み
+//	// 落下?したやつは飛ばす
+// ?ェック済み
 //	if (sess->obj_state == OBJ_STATE_MAIN_DROP)	return MOVE_STAGE_RESULT_DROP;
 	BOOL bCanMove = TRUE;
 	E_MOVE_STAGE_RESULT ret = MOVE_STAGE_RESULT_NONE;
@@ -1767,7 +1767,7 @@ E_MOVE_STAGE_RESULT common::chr::MoveStage(CMainStage* pStage, ptype_session ses
 			bCanMove = FALSE;
 			sess->ay += CHARA_DROP_SPEED;
 			PCHARA_SCR_INFO pCharaScrInfo = (PCHARA_SCR_INFO)sess->scrinfo;
-			// ステージ外確認
+			// ステ?ジ外確認
 			if (sess->ay >= (pStage->GetStageHeight()+pCharaScrInfo->rec_tex_chr.bottom/2) )
 			{
 				sess->ay = (short)(pStage->GetStageHeight()+pCharaScrInfo->rec_tex_chr.bottom);
@@ -1846,7 +1846,7 @@ E_CHECK_GROUND_RESULT common::chr::CheckGround(CMainStage* pStage, ptype_session
 		else if (sess->ay+CHARA_DROP_SPEED < y)
 		{
 			ret = (sess->vy == 0)?CHECK_GROUND_RESULT_FALLDOWN:CHECK_GROUND_RESULT_FALLING;
-			// 下端を超える場合、落下死
+			// 下?を超える場合、落下?
 			TCHARA_SCR_INFO* pScrInfo = common::scr::FindCharaScrInfoFromCharaType(sess->chara_type, pMapScrInfo);
 			if (sess->ay >= (pStage->GetStageHeight()+pScrInfo->rec_tex_chr.bottom/2) )
 				ret = CHECK_GROUND_RESULT_DROPOUT;
@@ -1860,7 +1860,7 @@ E_CHECK_GROUND_RESULT common::chr::CheckGround(CMainStage* pStage, ptype_session
 	else
 	{
 		ret = (sess->vy == 0)?CHECK_GROUND_RESULT_FALLDOWN:CHECK_GROUND_RESULT_FALLING;
-		// 地面が無い、ステージ外確認
+		// 地面が無い、ステ?ジ外確認
 		TCHARA_SCR_INFO* pScrInfo = common::scr::FindCharaScrInfoFromCharaType(sess->chara_type, pMapScrInfo);
 		if (sess->ay >= (pStage->GetStageHeight()+pScrInfo->rec_tex_chr.bottom/2) )
 			ret = CHECK_GROUND_RESULT_DROPOUT;
@@ -1939,7 +1939,7 @@ E_MOVE_GROUND_RESULT common::chr::MoveGround(CMainStage* pStage, ptype_session s
 	for (int i=0;i<CHARA_ACROSS_GROUND_LENGTH;i++)
 	{
 		pos.x += sess->vx;
-		// 移動範囲端チェック
+		// 移動範囲??ェック
 		if (pos.x < 0/*CHARA_BODY_RANGE*/ || pos.x >= pStage->GetStageWidth()/*-CHARA_BODY_RANGE*/)
 		{
 			bCanMoveFlg = FALSE;
@@ -2042,7 +2042,7 @@ E_MOVE_GROUND_RESULT common::chr::MoveGround(CMainStage* pStage, ptype_session s
 				sess->angle = (short)(dAverageAngle+270)%360;
 		}
 	}
-	// 移動可能値を減らす
+	// 移動可?値を減らす
 	sess->MV_c = max(sess->MV_c-1, 0);
 	return ret;	
 }
@@ -2065,7 +2065,7 @@ E_CHECK_GROUND_RESULT common::blt::CheckGround(CMainStage* pStage, ptype_blt blt
 		if (pos.y+OBJECT_DROP_SPEED < dest_my_pos.y)
 		{
 			ret = (blt->vy == 0)?CHECK_GROUND_RESULT_FALLING:CHECK_GROUND_RESULT_FALLDOWN;
-			// 下端を超える場合、スクリーンアウト
+			// 下?を超える場合、スクリ?ンアウト
 			TCHARA_SCR_INFO* pScrInfo = common::scr::FindCharaScrInfoFromCharaType(blt->chara_type, pMapScrInfo);
 			if (blt->ay >= (pStage->GetStageHeight()+pScrInfo->blt_info[blt->bullet_type].rec_blt_tex.bottom /2) )
 				ret = CHECK_GROUND_RESULT_DROPOUT;
@@ -2080,7 +2080,7 @@ E_CHECK_GROUND_RESULT common::blt::CheckGround(CMainStage* pStage, ptype_blt blt
 	else
 	{
 		ret = (blt->vy == 0)?CHECK_GROUND_RESULT_FALLDOWN:CHECK_GROUND_RESULT_FALLING;
-		// 地面が無い、ステージ外確認
+		// 地面が無い、ステ?ジ外確認
 		TCHARA_SCR_INFO* pScrInfo = common::scr::FindCharaScrInfoFromCharaType(blt->chara_type, pMapScrInfo);
 		if (blt->ay >= (pStage->GetStageHeight()+pScrInfo->blt_info[blt->bullet_type].rec_blt_tex.bottom/2) )
 			ret = CHECK_GROUND_RESULT_DROPOUT;
@@ -2165,7 +2165,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 		{
 			LuaFuncParam luaParams;
 			LuaFuncParam luaResults;
-			// 弾作ったキャラのObjNo,chr_obj_no,obj_no,スクリプト番号,弾タイプ,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+			// 弾作ったキャラのObjNo,chr_obj_no,obj_no,スクリプト番号,弾?イプ,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 			luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(blt->obj_no).Number(blt->frame_count).Number(blt->ax).Number(blt->ay).Number(blt->vx).Number(blt->vy).Number(blt->extdata1).Number(blt->extdata2);
 			if (!common::scr::CallLuaFunc(pLuah, "onFrame_CharaBullet", &luaResults, 0, &luaParams, pCriticalSection))
 				return ret;
@@ -2175,7 +2175,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 		{
 			LuaFuncParam luaParams;
 			LuaFuncParam luaResults;
-			// 弾作ったキャラのObjNo,chr_obj_no,obj_no,スクリプト番号,弾タイプ,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+			// 弾作ったキャラのObjNo,chr_obj_no,obj_no,スクリプト番号,弾?イプ,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 			luaParams.Number(blt->scrinfo->scr_index).Number(blt->obj_no).Number(blt->frame_count).Number(blt->ax).Number(blt->ay).Number(blt->vx).Number(blt->vy).Number(blt->extdata1).Number(blt->extdata2);
 			if (!common::scr::CallLuaFunc(pLuah, "onFrame_CharaSpell", &luaResults, 0, &luaParams, pCriticalSection))
 				return ret;
@@ -2185,7 +2185,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 		{
 			LuaFuncParam luaParams;
 			LuaFuncParam luaResults;
-			// 弾作ったキャラのObjNo,chr_obj_no,obj_no,スクリプト番号,弾タイプ,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+			// 弾作ったキャラのObjNo,chr_obj_no,obj_no,スクリプト番号,弾?イプ,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 			luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(blt->obj_no).Number(blt->frame_count).Number(blt->ax).Number(blt->ay).Number(blt->vx).Number(blt->vy).Number(blt->extdata1).Number(blt->extdata2);
 			if (!common::scr::CallLuaFunc(pLuah, "onFrame_StageBullet", &luaResults, 0, &luaParams, pCriticalSection))
 				return ret;
@@ -2193,7 +2193,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 		}
 	}
 
-	// フレーム処理でスクリプトによって削除されたか
+	// フレ??処理でスクリプトによって削除されたか
 	if (blt->proc_flg & PROC_FLG_OBJ_REMOVE)
 		return common::blt::MOVE_ACT_BULLET_RESULT_REMOVE;
 
@@ -2216,7 +2216,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 		{
 		case BLT_PROC_TYPE_SCR_CHARA:
 			{
-				// 弾作ったキャラのObjNo,chr_obj_no,obj_no,スクリプト番号,弾タイプ,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+				// 弾作ったキャラのObjNo,chr_obj_no,obj_no,スクリプト番号,弾?イプ,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 				luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(blt->obj_no).Number(blt->frame_count).Number(blt->bx).Number(blt->by).Number(blt->vx).Number(blt->vy).Number(nWind).Number(blt->extdata1).Number(blt->extdata2);
 				if (!common::scr::CallLuaFunc(pLuah, "onGetEphemeris_CharaBullet", &luaResults, 3, &luaParams, pCriticalSection))
 					return ret;
@@ -2224,7 +2224,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 			}
 		case BLT_PROC_TYPE_SCR_SPELL:
 			{
-				// 弾作ったキャラのObjNo,chr_obj_no,obj_no,スクリプト番号,弾タイプ,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+				// 弾作ったキャラのObjNo,chr_obj_no,obj_no,スクリプト番号,弾?イプ,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 				luaParams.Number(blt->scrinfo->scr_index).Number(blt->obj_no).Number(blt->frame_count).Number(blt->bx).Number(blt->by).Number(blt->vx).Number(blt->vy).Number(nWind).Number(blt->extdata1).Number(blt->extdata2);
 				if (!common::scr::CallLuaFunc(pLuah, "onGetEphemeris_CharaSpell", &luaResults, 3, &luaParams, pCriticalSection))
 					return ret;
@@ -2232,7 +2232,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 			}
 		case BLT_PROC_TYPE_SCR_STAGE:
 			{
-				// 弾作ったキャラのObjNo,chr_obj_no,obj_no,スクリプト番号,弾タイプ,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+				// 弾作ったキャラのObjNo,chr_obj_no,obj_no,スクリプト番号,弾?イプ,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 				luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(blt->obj_no).Number(blt->frame_count).Number(blt->bx).Number(blt->by).Number(blt->vx).Number(blt->vy).Number(nWind).Number(blt->extdata1).Number(blt->extdata2);
 				if (!common::scr::CallLuaFunc(pLuah, "onGetEphemeris_StageBullet", &luaResults, 3, &luaParams, pCriticalSection))
 					return ret;
@@ -2274,7 +2274,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 	}
 	else
 	{
-		// タイプがステージの場合、風に影響を受けない
+		// ?イプがステ?ジの場合、風に影響を受けない
 		switch (blt->obj_type)
 		{
 		case OBJ_TYPE_BLT_STAGE:
@@ -2377,17 +2377,17 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 						switch (blt->proc_type)
 						{
 						case BLT_PROC_TYPE_SCR_CHARA:
-							// script,弾タイプ,弾作ったキャラのObjNo,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+							// script,弾?イプ,弾作ったキャラのObjNo,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 							luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(blt->chr_obj_no).Number(blt->obj_no).Number((int)vecSavePos.x).Number((int)vecSavePos.y).Number((int)hit.x).Number((int)hit.y).Number((int)blt->vx).Number((int)blt->vy).Number(1.0f- dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 							bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitStage_CharaBullet", &luaResults, 1, &luaParams, pCriticalSection);
 							break;
 						case BLT_PROC_TYPE_SCR_SPELL:
-							// script,弾作ったキャラのObjNo,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+							// script,弾作ったキャラのObjNo,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 							luaParams.Number(blt->scrinfo->scr_index).Number(blt->chr_obj_no).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0f- dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 							bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitStage_CharaSpell", &luaResults, 1, &luaParams, pCriticalSection);
 							break;
 						case BLT_PROC_TYPE_SCR_STAGE:
-							// script,弾タイプ,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+							// script,弾?イプ,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 							luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0f- dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 							bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitStage_StageBullet", &luaResults, 1, &luaParams, pCriticalSection);
 							break;
@@ -2408,7 +2408,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 					}
 				}
 				
-				if (blt->proc_flg & PROC_FLG_OBJ_REMOVE)// 削除フラグが立った場合、止める
+				if (blt->proc_flg & PROC_FLG_OBJ_REMOVE)// 削除フラグが立った場合、?める
 				{
 					ret = common::blt::MOVE_ACT_BULLET_RESULT_REMOVE;
 					bBreak = TRUE;
@@ -2431,9 +2431,9 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 				it != pVecCharacters->end();
 				it++)
 			{
-				// スルー
+				// スル?
 				if (!(*it)->entity																// 不在
-				||	(*it)->obj_state & OBJ_STATE_MAIN_NOLIVE_FLG)		// 死亡|落下
+				||	(*it)->obj_state & OBJ_STATE_MAIN_NOLIVE_FLG)		// ?亡|落下
 					continue;
 
 				type_session* sess = (*it);
@@ -2444,7 +2444,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 					hit_obj_no = (*it)->obj_no;								// 当たった番号
 					hit =  (v1*(blt->hit_range)) + vecCheckPos;		//	当たった位置
 					vecSavePos = ((float)i*v1) + pos;						//	当たった直前の位置
-					// 移動しないで当たっている場合、当たった位置から+キャラクタ半径分離す
+					// 移動しないで当たっている場合、当たった位置から+キャラク?半径分離す
 					if (!bNoVec)
 					{
 //> 20110409
@@ -2473,7 +2473,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 					{
 					case BLT_PROC_TYPE_SCR_CHARA:
 						luaParams.Clear();	luaResults.Clear();
-						// script,弾タイプ,弾作ったキャラのObjNo,chr_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata1,extdata2
+						// script,弾?イプ,弾作ったキャラのObjNo,chr_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata1,extdata2
 						luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(blt->chr_obj_no).Number(hit_obj_no).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0-dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 						if (!common::scr::CallLuaFunc(pLuah, "onHitChara_CharaBullet", &luaResults, 1, &luaParams, pCriticalSection))
 							return ret;
@@ -2481,7 +2481,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 							bBreak = TRUE;
 						break;
 					case BLT_PROC_TYPE_SCR_SPELL:
-						// script,弾作ったキャラのObjNo,chr_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata1,extdata2
+						// script,弾作ったキャラのObjNo,chr_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata1,extdata2
 						luaParams.Clear();	luaResults.Clear();
 						luaParams.Number(blt->scrinfo->scr_index).Number(blt->chr_obj_no).Number(hit_obj_no).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0-dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 						if (!common::scr::CallLuaFunc(pLuah, "onHitChara_CharaSpell", &luaResults, 1, &luaParams, pCriticalSection))
@@ -2490,7 +2490,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 							bBreak = TRUE;
 						break;
 					case BLT_PROC_TYPE_SCR_STAGE:
-						// script,弾タイプ,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata1,extdata2
+						// script,弾?イプ,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata1,extdata2
 						luaParams.Clear();	luaResults.Clear();
 						luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(hit_obj_no).Number(blt->obj_no).Number(blt->ax).Number(blt->ay).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0-dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 						if (!common::scr::CallLuaFunc(pLuah, "onHitChara_StageBullet", &luaResults, 1, &luaParams, pCriticalSection))
@@ -2499,7 +2499,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 							bBreak = TRUE;
 						break;
 					case BLT_PROC_TYPE_ITEM:
-						if (blt->proc_flg & PROC_FLG_OBJ_REMOVE)// 削除フラグが立った場合、止める
+						if (blt->proc_flg & PROC_FLG_OBJ_REMOVE)// 削除フラグが立った場合、?める
 						{
 							ret = common::blt::MOVE_ACT_BULLET_RESULT_REMOVE;
 							bBreak = TRUE;
@@ -2528,11 +2528,11 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 				BYTE objType = ((ptype_blt)(*it).second)->obj_type;
 				// 当たり判定の無いオブジェクト
 				if ((BYTE)(objType & OBJ_TYPE_TACTIC)) continue;
-				// 自分自身ならスルー
+				// 自分自身ならスル?
 				if ( (DWORD)(*it).second == (DWORD)blt)	continue;
-				// アイテム同士スルー
+				// アイテ?同士スル?
 				if ((blt->obj_type & OBJ_TYPE_ITEM) && (objType & OBJ_TYPE_ITEM)) continue;
-				// 削除フラグ持ちの弾ならスルー
+				// 削除フラグ持ちの弾ならスル?
 				if ((*it).second->proc_flg & PROC_FLG_OBJ_REMOVE)	continue;
 				int nObjRange = BLT_DEFAULT_HITRANGE;
 				if ((*it).second->obj_type & OBJ_TYPE_BLT)
@@ -2573,7 +2573,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 					case BLT_PROC_TYPE_SCR_CHARA:
 						luaParams.Clear();		luaResults.Clear();
 						// 動いた側のイベント
-						// script,弾タイプ,弾作ったキャラのObjNo,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+						// script,弾?イプ,弾作ったキャラのObjNo,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 						luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(blt->chr_obj_no).Number(hit_obj_no).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0-dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 						if (!common::scr::CallLuaFunc(pLuah, "onHitBullet_CharaBullet", &luaResults, 1, &luaParams, pCriticalSection))
 							return ret;
@@ -2582,7 +2582,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 					case BLT_PROC_TYPE_SCR_SPELL:
 						{
 							luaParams.Clear();		luaResults.Clear();
-							// script,弾タイプ,弾作ったキャラのObjNo,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+							// script,弾?イプ,弾作ったキャラのObjNo,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 							luaParams.Number(blt->scrinfo->scr_index).Number(blt->chr_obj_no).Number(hit_obj_no).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0-dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 							if (!common::scr::CallLuaFunc(pLuah, "onHitBullet_CharaSpell", &luaResults, 1, &luaParams, pCriticalSection) )
 								return ret;
@@ -2592,7 +2592,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 					case BLT_PROC_TYPE_SCR_STAGE:
 						{
 							luaParams.Clear();		luaResults.Clear();
-							// script,弾タイプ,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+							// script,弾?イプ,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 							luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(hit_obj_no).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0-dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 							if (!common::scr::CallLuaFunc(pLuah, "onHitBullet_StageBullet", &luaResults, 1, &luaParams, pCriticalSection))
 								return ret;
@@ -2620,23 +2620,23 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 						switch (hit_blt->proc_type)
 						{
 						case BLT_PROC_TYPE_SCR_CHARA:
-							// script,弾タイプ,弾作ったキャラのObjNo,chr_obj_no,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+							// script,弾?イプ,弾作ったキャラのObjNo,chr_obj_no,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 							luaParams.Number(hit_blt->scrinfo->scr_index).Number(hit_blt->bullet_type).Number(hit_blt->chr_obj_no).Number(blt->obj_no).Number(hit_obj_no).Number(hit_blt->ax).Number(hit_blt->ay).Number(hit.x).Number(hit.y).Number(hit_blt->vx).Number(hit_blt->vy).Number(0.0).Number(hit_blt->frame_count).Number(hit_blt->extdata1).Number(hit_blt->extdata2);
 							bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitBullet_CharaBullet", &luaResults, 1, &luaParams, pCriticalSection);
 							break;
 						case BLT_PROC_TYPE_SCR_SPELL:
-							// script,弾作ったキャラのObjNo,chr_obj_no,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+							// script,弾作ったキャラのObjNo,chr_obj_no,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 							luaParams.Number(hit_blt->scrinfo->scr_index).Number(hit_blt->chr_obj_no).Number(blt->obj_no).Number(hit_obj_no).Number(hit_blt->ax).Number(hit_blt->ay).Number(hit.x).Number(hit.y).Number(hit_blt->vx).Number(hit_blt->vy).Number(0.0).Number(hit_blt->frame_count).Number(hit_blt->extdata1).Number(hit_blt->extdata2);
 							bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitBullet_CharaSpell", &luaResults, 1, &luaParams, pCriticalSection);
 							break;
 						case BLT_PROC_TYPE_SCR_STAGE:
-							// script,弾タイプ,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+							// script,弾?イプ,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 							luaParams.Number(hit_blt->scrinfo->scr_index).Number(hit_blt->bullet_type).Number(hit_obj_no).Number(blt->obj_no).Number(hit_blt->ax).Number(hit_blt->ay).Number(hit.x).Number(hit.y).Number(hit_blt->vx).Number(hit_blt->vy).Number(0.0).Number(hit_blt->frame_count).Number(hit_blt->extdata1).Number(hit_blt->extdata2);
 							bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitBullet_StageBullet", &luaResults, 1, &luaParams, pCriticalSection);
 							break;
 						}
 						if (!bLuaFuncRes)	return ret;
-						// スクリプトによって操作されたか
+						// スクリプトによって?作されたか
 						if (blt->proc_flg & (PROC_FLG_OBJ_REMOVE|PROC_FLG_OBJ_UPDATE_VEC|PROC_FLG_OBJ_UPDATE_POS))
 							bBreak = TRUE;
 					}
@@ -2646,8 +2646,8 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 			}
 			if (bBreak)	break;
 
-			// キャラやオブジェクトと当たっていない場合、ステージ当たり判定
-			// GASはステージ当たり判定なし
+			// キャラやオブジェクトと当たっていない場合、ステ?ジ当たり判定
+			// GASはステ?ジ当たり判定なし
 			if ( blt->obj_type & (OBJ_TYPE_SOLID|OBJ_TYPE_LIQUID) )
 			{
 				if (pStage->IsHit(&hit, &vecCheckPos, blt->hit_range))
@@ -2683,17 +2683,17 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 						switch (blt->proc_type)
 						{
 						case BLT_PROC_TYPE_SCR_CHARA:
-							// script,弾タイプ,弾作ったキャラのObjNo,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+							// script,弾?イプ,弾作ったキャラのObjNo,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 							luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(blt->chr_obj_no).Number(blt->obj_no).Number((int)vecSavePos.x).Number((int)vecSavePos.y).Number((int)hit.x).Number((int)hit.y).Number((int)blt->vx).Number((int)blt->vy).Number(1.0f- dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 							bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitStage_CharaBullet", &luaResults, 1, &luaParams, pCriticalSection);
 							break;
 						case BLT_PROC_TYPE_SCR_SPELL:
-							// script,弾作ったキャラのObjNo,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+							// script,弾作ったキャラのObjNo,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 							luaParams.Number(blt->scrinfo->scr_index).Number(blt->chr_obj_no).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0f- dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 							bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitStage_CharaSpell", &luaResults, 1, &luaParams, pCriticalSection);
 							break;
 						case BLT_PROC_TYPE_SCR_STAGE:
-							// script,弾タイプ,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+							// script,弾?イプ,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 							luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0f- dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 							bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitStage_StageBullet", &luaResults, 1, &luaParams, pCriticalSection);
 							break;
@@ -2717,7 +2717,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 						break;
 					}
 					
-					if (blt->proc_flg & PROC_FLG_OBJ_REMOVE)// 削除フラグが立った場合、止める
+					if (blt->proc_flg & PROC_FLG_OBJ_REMOVE)// 削除フラグが立った場合、?める
 					{
 						ret = common::blt::MOVE_ACT_BULLET_RESULT_REMOVE;
 						bBreak = TRUE;
@@ -2746,7 +2746,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 //< 20110503
 			blt->vx = (short)(vec.x*(float)(BLT_VEC_FACT_N*BLT_VEC_FACT_N));
 			blt->vy = (short)(vec.y*(float)(BLT_VEC_FACT_N*BLT_VEC_FACT_N));
-			//> 20110130 オーバーフロー対策
+			//> 20110130 オ?バ?フロ?対策
 //			blt->bx = (short)(vecSavePos.x*BLT_VEC_FACT_N);
 //			blt->by = (short)(vecSavePos.y*BLT_VEC_FACT_N);
 //			blt->ax = (short)(vecSavePos.x);
@@ -2755,11 +2755,11 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 			blt->by = (short)max(min(32767, (int)(vecSavePos.y*BLT_VEC_FACT_N)), -32768);
 			blt->ax = (short)((float)blt->bx*BLT_POS_FACT_F);
 			blt->ay = (short)((float)blt->by*BLT_POS_FACT_F);
-			//< 20110130 オーバーフロー対策
+			//< 20110130 オ?バ?フロ?対策
 		}
 		else if (blt->proc_flg & PROC_FLG_OBJ_UPDATE_VEC)
 		{
-			//> 20110130 オーバーフロー対策
+			//> 20110130 オ?バ?フロ?対策
 //			blt->bx = (short)(vecSavePos.x*BLT_VEC_FACT_N);
 //			blt->by = (short)(vecSavePos.y*BLT_VEC_FACT_N);
 //			blt->ax = (short)(vecSavePos.x);
@@ -2768,7 +2768,7 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 			blt->by = (short)max(min(32767, (int)(vecSavePos.y*BLT_VEC_FACT_N)), -32768);
 			blt->ax = (short)((float)blt->bx*BLT_POS_FACT_F);
 			blt->ay = (short)((float)blt->by*BLT_POS_FACT_F);
-			//< 20110130 オーバーフロー対策
+			//< 20110130 オ?バ?フロ?対策
 		}
 	}
 	else
@@ -2777,23 +2777,23 @@ common::blt::E_MOVE_ACT_BULLET_RESULT common::blt::MoveActBullet(CMainStage* pSt
 		{
 			blt->vx = (short)(vec.x*(float)BLT_VEC_FACT_N);
 			blt->vy = (short)(vec.y*(float)BLT_VEC_FACT_N);
-			//> 20110130 オーバーフロー対策
+			//> 20110130 オ?バ?フロ?対策
 //			blt->bx += (short)vec.x;
 //			blt->by += (short)vec.y;
 			blt->bx = (short)max(min(32767, (int)vec.x+(int)blt->bx), -32768);
 			blt->by = (short)max(min(32767, (int)vec.y+(int)blt->by), -32768);
-			//< 20110130 オーバーフロー対策
+			//< 20110130 オ?バ?フロ?対策
 			blt->ax = (short)((float)blt->bx*BLT_POS_FACT_F);
 			blt->ay = (short)((float)blt->by*BLT_POS_FACT_F);
 		}
 		else if (blt->proc_flg & PROC_FLG_OBJ_UPDATE_VEC)
 		{
-			//> 20110130 オーバーフロー対策
+			//> 20110130 オ?バ?フロ?対策
 //			blt->bx += (short)vec.x;
 //			blt->by += (short)vec.y;
 			blt->bx = (short)max(min(32767, (int)vec.x+(int)blt->bx), -32768);
 			blt->by = (short)max(min(32767, (int)vec.y+(int)blt->by), -32768);
-			//< 20110130 オーバーフロー対策
+			//< 20110130 オ?バ?フロ?対策
 			blt->ax = (short)((float)blt->bx*BLT_POS_FACT_F);
 			blt->ay = (short)((float)blt->by*BLT_POS_FACT_F);
 		}
@@ -2936,9 +2936,9 @@ common::blt::E_MOVE_WAIT_BULLET_RESULT  common::blt::MoveWaitBullet(CMainStage* 
 			it != pVecCharacters->end();
 			it++)
 		{
-			// スルー
+			// スル?
 			if (!(*it)->entity													// 不在
-			||	(*it)->obj_state == OBJ_STATE_MAIN_DEAD		// 死亡
+			||	(*it)->obj_state == OBJ_STATE_MAIN_DEAD		// ?亡
 			||	(*it)->obj_state == OBJ_STATE_MAIN_DROP)	// 落下
 				continue;
 
@@ -2963,17 +2963,17 @@ common::blt::E_MOVE_WAIT_BULLET_RESULT  common::blt::MoveWaitBullet(CMainStage* 
 					switch (blt->proc_type)
 					{
 					case BLT_PROC_TYPE_SCR_CHARA:
-						// script,弾タイプ,chr_obj_no,obj_no,スクリプト番号,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+						// script,弾?イプ,chr_obj_no,obj_no,スクリプト番号,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 						luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(blt->chr_obj_no).Number(hit_obj_no).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0- dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 						bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitChara_CharaBullet", &luaResults, 1, &luaParams, pCriticalSection);
 						break;
 					case BLT_PROC_TYPE_SCR_SPELL:
-						// script,chr_obj_no,obj_no,スクリプト番号,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+						// script,chr_obj_no,obj_no,スクリプト番号,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 						luaParams.Number(blt->scrinfo->scr_index).Number(blt->chr_obj_no).Number(hit_obj_no).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0- dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 						bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitChara_CharaSpell", &luaResults, 1, &luaParams, pCriticalSection);
 						break;
 					case BLT_PROC_TYPE_SCR_STAGE:
-						// script,弾タイプ,obj_no,スクリプト番号,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+						// script,弾?イプ,obj_no,スクリプト番号,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 						luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(hit_obj_no).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0- dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 						bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitChara_StageBullet", &luaResults, 1, &luaParams, pCriticalSection);
 						break;
@@ -3003,11 +3003,11 @@ common::blt::E_MOVE_WAIT_BULLET_RESULT  common::blt::MoveWaitBullet(CMainStage* 
 			BYTE objType = ((ptype_blt)(*it).second)->obj_type;
 			// 当たり判定の無いオブジェクト
 			if ((BYTE)(objType & OBJ_TYPE_TACTIC)) continue;
-			// 自分自身ならスルー
+			// 自分自身ならスル?
 			if ( (DWORD)(*it).second == (DWORD)blt)	continue;
-			// アイテム同士スルー
+			// アイテ?同士スル?
 			if ((blt->obj_type & OBJ_TYPE_ITEM) && (objType & OBJ_TYPE_ITEM)) continue;
-			// 削除フラグ持ちの弾ならスルー
+			// 削除フラグ持ちの弾ならスル?
 			if ((*it).second->proc_flg & PROC_FLG_OBJ_REMOVE)	continue;
 			int nObjRange = BLT_DEFAULT_HITRANGE;
 			if ((*it).second->obj_type & OBJ_TYPE_BLT)
@@ -3038,7 +3038,7 @@ common::blt::E_MOVE_WAIT_BULLET_RESULT  common::blt::MoveWaitBullet(CMainStage* 
 				case BLT_PROC_TYPE_SCR_CHARA:
 					luaParams.Clear();		luaResults.Clear();
 					// 動いた側のイベント
-					// script,弾タイプ,弾作ったキャラのObjNo,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+					// script,弾?イプ,弾作ったキャラのObjNo,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 					luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(blt->chr_obj_no).Number(hit_obj_no).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0-dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 					if (!common::scr::CallLuaFunc(pLuah, "onHitBullet_CharaBullet", &luaResults, 1, &luaParams, pCriticalSection))
 						return ret;
@@ -3047,7 +3047,7 @@ common::blt::E_MOVE_WAIT_BULLET_RESULT  common::blt::MoveWaitBullet(CMainStage* 
 				case BLT_PROC_TYPE_SCR_SPELL:
 					{
 						luaParams.Clear();		luaResults.Clear();
-						// script,弾タイプ,弾作ったキャラのObjNo,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+						// script,弾?イプ,弾作ったキャラのObjNo,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 						luaParams.Number(blt->scrinfo->scr_index).Number(blt->chr_obj_no).Number(hit_obj_no).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0-dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 						if (!common::scr::CallLuaFunc(pLuah, "onHitBullet_CharaSpell", &luaResults, 1, &luaParams, pCriticalSection) )
 							return ret;
@@ -3057,7 +3057,7 @@ common::blt::E_MOVE_WAIT_BULLET_RESULT  common::blt::MoveWaitBullet(CMainStage* 
 				case BLT_PROC_TYPE_SCR_STAGE:
 					{
 						luaParams.Clear();		luaResults.Clear();
-						// script,弾タイプ,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+						// script,弾?イプ,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 						luaParams.Number(blt->scrinfo->scr_index).Number(blt->bullet_type).Number(hit_obj_no).Number(blt->obj_no).Number((double)vecSavePos.x).Number((double)vecSavePos.y).Number(hit.x).Number(hit.y).Number(blt->vx).Number(blt->vy).Number(1.0-dElapsed).Number(blt->frame_count).Number(blt->extdata1).Number(blt->extdata2);
 						if (!common::scr::CallLuaFunc(pLuah, "onHitBullet_StageBullet", &luaResults, 1, &luaParams, pCriticalSection))
 							return ret;
@@ -3087,23 +3087,23 @@ common::blt::E_MOVE_WAIT_BULLET_RESULT  common::blt::MoveWaitBullet(CMainStage* 
 					switch (hit_blt->proc_type)
 					{
 					case BLT_PROC_TYPE_SCR_CHARA:
-						// script,弾タイプ,弾作ったキャラのObjNo,chr_obj_no,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+						// script,弾?イプ,弾作ったキャラのObjNo,chr_obj_no,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 						luaParams.Number(hit_blt->scrinfo->scr_index).Number(hit_blt->bullet_type).Number(hit_blt->chr_obj_no).Number(blt->obj_no).Number(hit_obj_no).Number(hit_blt->ax).Number(hit_blt->ay).Number(hit.x).Number(hit.y).Number(hit_blt->vx).Number(hit_blt->vy).Number(0.0).Number(hit_blt->frame_count).Number(hit_blt->extdata1).Number(hit_blt->extdata2);
 						bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitBullet_CharaBullet", &luaResults, 1, &luaParams, pCriticalSection);
 						break;
 					case BLT_PROC_TYPE_SCR_SPELL:
-						// script,弾作ったキャラのObjNo,chr_obj_no,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+						// script,弾作ったキャラのObjNo,chr_obj_no,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 						luaParams.Number(hit_blt->scrinfo->scr_index).Number(hit_blt->chr_obj_no).Number(blt->obj_no).Number(hit_obj_no).Number(hit_blt->ax).Number(hit_blt->ay).Number(hit.x).Number(hit.y).Number(hit_blt->vx).Number(hit_blt->vy).Number(0.0).Number(hit_blt->frame_count).Number(hit_blt->extdata1).Number(hit_blt->extdata2);
 						bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitBullet_CharaSpell", &luaResults, 1, &luaParams, pCriticalSection);
 						break;
 					case BLT_PROC_TYPE_SCR_STAGE:
-						// script,弾タイプ,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0～1.0/extdata
+						// script,弾?イプ,hit_obj_no,obj_no,当たった位置x,y/移動値x,y/残り移動時間0.0?1.0/extdata
 						luaParams.Number(hit_blt->scrinfo->scr_index).Number(hit_blt->bullet_type).Number(hit_obj_no).Number(blt->obj_no).Number(hit_blt->ax).Number(hit_blt->ay).Number(hit.x).Number(hit.y).Number(hit_blt->vx).Number(hit_blt->vy).Number(0.0).Number(hit_blt->frame_count).Number(hit_blt->extdata1).Number(hit_blt->extdata2);
 						bLuaFuncRes = common::scr::CallLuaFunc(pLuah, "onHitBullet_StageBullet", &luaResults, 1, &luaParams, pCriticalSection);
 						break;
 					}
 					if (!bLuaFuncRes)	return ret;
-					// スクリプトによって操作されたか
+					// スクリプトによって?作されたか
 					if (blt->proc_flg & (PROC_FLG_OBJ_REMOVE|PROC_FLG_OBJ_UPDATE_VEC|PROC_FLG_OBJ_UPDATE_POS))
 						bBreak = TRUE;
 				}
@@ -3122,7 +3122,7 @@ common::blt::E_MOVE_WAIT_BULLET_RESULT  common::blt::MoveWaitBullet(CMainStage* 
 		vec*=(BLT_POS_FACT_N);
 		blt->vx = (short)(vec.x*(float)BLT_VEC_FACT_N);
 		blt->vy = (short)(vec.y*(float)BLT_VEC_FACT_N);
-		//> 20110130 オーバーフロー対策
+		//> 20110130 オ?バ?フロ?対策
 //		blt->bx = (short)(vecSavePos.x*BLT_VEC_FACT_N);
 //		blt->by = (short)(vecSavePos.y*BLT_VEC_FACT_N);
 //		blt->ax = (short)(vecSavePos.x);
@@ -3131,19 +3131,19 @@ common::blt::E_MOVE_WAIT_BULLET_RESULT  common::blt::MoveWaitBullet(CMainStage* 
 		blt->by = (short)max(min(32767, (int)(vecSavePos.y*BLT_VEC_FACT_N)), -32768);
 		blt->ax = (short)((float)blt->bx*BLT_POS_FACT_F);
 		blt->ay = (short)((float)blt->by*BLT_POS_FACT_F);
-		//< 20110130 オーバーフロー対策
+		//< 20110130 オ?バ?フロ?対策
 	}
 	else if (bMove)
 	{
 		vec*=(BLT_POS_FACT_N);
 		blt->vx = (short)(vec.x*(float)BLT_VEC_FACT_N);
 		blt->vy = (short)(vec.y*(float)BLT_VEC_FACT_N);
-		//> 20110130 オーバーフロー対策
+		//> 20110130 オ?バ?フロ?対策
 //		blt->bx += (short)vec.x;
 //		blt->by += (short)vec.y;
 		blt->bx = (short)max(min(32767, (int)vec.x+(int)blt->bx), -32768);
 		blt->by = (short)max(min(32767, (int)vec.y+(int)blt->by), -32768);
-		//< 20110130 オーバーフロー対策
+		//< 20110130 オ?バ?フロ?対策
 		blt->ax = (short)((float)blt->bx*BLT_POS_FACT_F);
 		blt->ay = (short)((float)blt->by*BLT_POS_FACT_F);
 	}

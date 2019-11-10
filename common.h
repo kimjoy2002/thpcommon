@@ -6,8 +6,6 @@
 #include <map>
 #include <vector>
 #include <algorithm>
-#include "../include/define.h"
-#include "../include/types.h"
 #include "CCriticalSection.h"
 #include "util.h"
 
@@ -58,8 +56,8 @@ namespace common
 		// スクリプトで発射処理
 		BOOL CallShootingFunc(LuaHelper* pLuah, ptype_session shot_sess, int nProcType, int nBltType, int nShotAngle, int nShotPower, TCHARA_SCR_INFO* pCharaScrInfo, int nCharaObjNo, int nFrame, int nIndicatorAngle, int nIndicatorPower, CCriticalSection* pCriticalSection);
 
-		// 各スクリプトリソースのハッシュ値を取得
-		// 戻り値-1:ハッシュ値が何らかの理由で取得できなかった/ 0:これ以上のファイルは無い / 1:取得成功
+		// 各スクリプトリ??スのハッシュ値を取得
+		// 戻り値-1:ハッシュ値が何らかの理由で取得できなかった/ 0:これ以上のフ?イルは無い / 1:取得成功
 		int GetCharaFileHash(LuaHelper* pLuah, int nID, int nFileNo, char* md5, WCHAR* path, std::map < int, TCHARA_SCR_INFO >* pMapScrInfo, CCriticalSection* pCriticalSection);
 		int GetStageFileHash(LuaHelper* pLuah, int nID, int nFileNo, char* md5, WCHAR* path, std::map < int, TSTAGE_SCR_INFO >* pMapScrInfo, CCriticalSection* pCriticalSection);
 
@@ -90,7 +88,7 @@ namespace common
 		CHECK_GROUND_RESULT_GETDOWN,	// 着地
 		CHECK_GROUND_RESULT_FALLDOWN,	// 落下
 		CHECK_GROUND_RESULT_FALLING,		// 落下中
-		CHECK_GROUND_RESULT_DROPOUT,		// 落下死
+		CHECK_GROUND_RESULT_DROPOUT,		// 落下?
 	};
 
 	namespace chr
@@ -100,7 +98,7 @@ namespace common
 			MOVE_STAGE_RESULT_NONE,				// 変更なし
 			MOVE_STAGE_RESULT_MOVED,				// 移動した
 			MOVE_STAGE_RESULT_VEC_CHANGE,	// 移動値変更（落下⇔着地・移動⇔落下)
-			MOVE_STAGE_RESULT_DROP,				// 落下死
+			MOVE_STAGE_RESULT_DROP,				// 落下?
 			MOVE_STAGE_RESULT_REMOVE,			// 削除
 		};
 		enum E_MOVE_GROUND_RESULT
@@ -149,9 +147,9 @@ namespace common
 			MOVE_ACT_BULLET_RESULT_NONE,				// 変更なし
 			MOVE_ACT_BULLET_RESULT_MOVED,				// 移動した
 			MOVE_ACT_BULLET_RESULT_VEC_CHANGE,	// 移動値変更（落下⇔着地・移動⇔落下)
-			MOVE_ACT_BULLET_RESULT_DROP,				// 落下死
+			MOVE_ACT_BULLET_RESULT_DROP,				// 落下?
 			MOVE_ACT_BULLET_RESULT_REMOVE,			// 削除
-			MOVE_ACT_BULLET_RESULT_STAGE_HIT,		// ステージに当たった
+			MOVE_ACT_BULLET_RESULT_STAGE_HIT,		// ステ?ジに当たった
 			MOVE_ACT_BULLET_RESULT_CHARA_HIT,		// キャラに当たった
 			MOVE_ACT_BULLET_RESULT_OBJECT_HIT,		// オブジェクトに当たった
 		};
@@ -163,7 +161,7 @@ namespace common
 			MOVE_WAIT_BULLET_RESULT_GETDOWN,		// 着地
 			MOVE_WAIT_BULLET_RESULT_FALLDOWN,		// 落下
 			MOVE_WAIT_BULLET_RESULT_FALLING,			// 落下中
-			MOVE_WAIT_BULLET_RESULT_DROPOUT,		// 落下死
+			MOVE_WAIT_BULLET_RESULT_DROPOUT,		// 落下?
 			MOVE_WAIT_BULLET_RESULT_REMOVED,		// 削除
 			MOVE_WAIT_BULLET_RESULT_VEC_CHANGE,	// 移動値変更
 		};

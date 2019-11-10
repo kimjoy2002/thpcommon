@@ -466,10 +466,10 @@ public:
 private:
 
 // 変数
-	CRITICAL_SECTION m_CriticalSectionPacket;				// パケットキュー保護
-	CRITICAL_SECTION m_CriticalSectionSession;			// ユーザー情報保護
+	CRITICAL_SECTION m_CriticalSectionPacket;				// パケットキュ?保護
+	CRITICAL_SECTION m_CriticalSectionSession;			// ユ?ザ?情報保護
 	CRITICAL_SECTION m_CriticalSectionObject;				// オブジェクト情報保護
-	CRITICAL_SECTION m_CriticalSectionStageTexture;	// テクスチャ情報保護
+	CRITICAL_SECTION m_CriticalSectionStageTexture;	// テクス?ャ情報保護
 	CRITICAL_SECTION m_CriticalSectionEffect;				// エフェクト情報保護
 	CRITICAL_SECTION m_CriticalSectionSound;				// サウンド情報保護
 	CRITICAL_SECTION m_CriticalSectionLua;					// Lua情報保護
