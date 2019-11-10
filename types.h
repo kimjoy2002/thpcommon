@@ -2,6 +2,7 @@
 #define H_TYPES___
 
 #include "TCHAR.h"
+#include "define.h"
 #include <string>
 #include <d3d9.h>
 #include <d3dx9math.h>
