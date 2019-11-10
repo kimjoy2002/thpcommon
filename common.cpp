@@ -1695,8 +1695,8 @@ E_CHARA_GETDOWN_RESULT common::chr::CharaGetDown(CMainStage* pStage, short* px, 
 			*py = dy;
 			ret = CHARA_GETDOWN_RESULT_UP_GETDOWN;
 		}
-		else
-			OutputDebugStr(L"!NoGroudUp");
+		else {}
+			//OutputDebugStr(L"!NoGroudUp");
 	}
 	else
 	{

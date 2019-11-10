@@ -62,7 +62,7 @@ BOOL AddPacketTeamUser(CPacketQueue *pQueue,int team_no, t_sessionInfo* sess_inf
 		return FALSE;
 	BOOL ret = FALSE;
 	
-	//> 接続済みユーザとの処理
+	//> 接続済みユ?ザとの処理
 	for(int i=0;i<g_nMaxLoginNum;i++)
 	{
 		ptype_session sess = &(sess_info[i].s);
@@ -70,7 +70,7 @@ BOOL AddPacketTeamUser(CPacketQueue *pQueue,int team_no, t_sessionInfo* sess_inf
 		if (sess->connect_state != CONN_STATE_AUTHED)	continue;
 		if (sess->team_no != GALLERY_TEAM_NO			// 観戦
 		&& sess->team_no != team_no)	continue;			// 飛ばすセッションか
-		ret |=AddPacket(pQueue, sess, data, size);						// キュー追加
+		ret |=AddPacket(pQueue, sess, data, size);						// キュ?追加
 		if (!ret)	break;
 	}
 	return TRUE;
@@ -82,14 +82,14 @@ BOOL AddPacketAllUser(CPacketQueue *pQueue,ptype_session ignore_sess, t_sessionI
 	if (!sess_info || !data || size > MAX_PACKET_SIZE)
 		return FALSE;
 	BOOL ret = FALSE;
-	//> 接続済みユーザとの処理
+	//> 接続済みユ?ザとの処理
 	for(int i=0;i<g_nMaxLoginNum;i++)
 	{
 		ptype_session sess = &(sess_info[i].s);
 		// 認証済みか
 		if (sess->connect_state != CONN_STATE_AUTHED)	continue;
 		if ( sess == ignore_sess)	continue;						// 飛ばすセッションか
-		ret |=AddPacket(pQueue, sess, data, size);						// キュー追加
+		ret |=AddPacket(pQueue, sess, data, size);						// キュ?追加
 		if (!ret)	break;
 	}
 	return TRUE;
@@ -99,7 +99,7 @@ BOOL AddPacketAllUser(CPacketQueue *pQueue,ptype_session ignore_sess, t_sessionI
 void EnqueuePacket(type_queue* pq, type_packet* packet)
 {
 	type_queue* temp = pq;
-	// 最終キューまで移動
+	// 最終キュ?まで移動
 	for (; temp->next; temp=temp->next);
 
 	temp->next = (type_queue*)malloc(sizeof(type_queue));
@@ -181,7 +181,7 @@ int CPacketQueue::EnqueueRaw(type_packet * packet)
 	}
 	else
 	{
-		// 最終キューまで移動
+		// 最終キュ?まで移動
 		for (; temp->next; temp=temp->next);
 
 		temp->next = (type_queue*)malloc(sizeof(type_queue));
@@ -195,7 +195,7 @@ int CPacketQueue::EnqueueRaw(type_packet * packet)
 	temp->packet = packet;
 
 	m_nCount++;
-	// キューが増えた通知
+	// キュ?が増えた通知
 	DoGrowEvent();
 
 	return m_nCount;
@@ -216,14 +216,14 @@ int CPacketQueue::Enqueue(type_queue * pq)
 	}
 	else
 	{
-		// 最終キューまで移動
+		// 最終キュ?まで移動
 		for (; temp->next; temp=temp->next);
 		temp->next = pq;
 	}
 	
 	for (type_queue * pcount=pq; pcount; pcount=pcount->next) ret++;
 	m_nCount += ret;
-	// キューが増えた通知
+	// キュ?が増えた通知
 	DoGrowEvent();
 	return m_nCount;
 }
