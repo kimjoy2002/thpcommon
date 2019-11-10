@@ -1,4 +1,5 @@
 #include "CMainStage.h"
+#include "define.h"
 
 CMainStage::CMainStage()
 {
