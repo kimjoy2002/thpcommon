@@ -3,6 +3,7 @@
 #ifndef H_TYPE_CLASS___
 #define H_TYPE_CLASS___
 
+#define MAX_TEAM_COUNT 2
 #define CHARA_HIT_RANGE 3
 #define CHARA_BODY_RANGE 3
 #define D3DDEFAULT_FORMAT D3DFMT_R8G8B8

@@ -14,6 +14,7 @@
 //#include "tolua_glue/thg_glue.h"
 #include "LuaHelper.h"
 #include "CMainStage.h"
+#include "types.h"
 #include "../clx/clx/md5.h"
 #include <string>
 
