@@ -568,7 +568,7 @@ int common::scr::LoadStageScript(int num, const char* exedir, const char* module
 
 	WCHAR wsmd[80];
 	SafePrintf(wsmd,80, L"#define HASH_STAGE%02d\t\t\"%s\"\n", nID, wsHash);
-	OutputDebugStr(wsmd);
+	//OutputDebugStr(wsmd);
 
 #endif
 	// スクリプト番号
