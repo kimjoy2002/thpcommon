@@ -119,21 +119,21 @@ public:
 			OutputDebugStr(L"!CCriticalSection::m_bInputFlg\n");
 #endif
 #endif
-		OutputDebugStr(L"m_CriticalSectionPacket\n");
+		//OutputDebugStr(L"m_CriticalSectionPacket\n");
 		DelCS(&m_CriticalSectionPacket);
-		OutputDebugStr(L"m_CriticalSectionSession\n");
+		//OutputDebugStr(L"m_CriticalSectionSession\n");
 		DelCS(&m_CriticalSectionSession);
 //		OutputDebugStr(L"m_CriticalSectionObject");
 //		DelCS(&m_CriticalSectionObject);
-		OutputDebugStr(L"m_CriticalSectionStageTexture\n");
+		//OutputDebugStr(L"m_CriticalSectionStageTexture\n");
 		DelCS(&m_CriticalSectionStageTexture);
-		OutputDebugStr(L"m_CriticalSectionEffect\n");
+		//OutputDebugStr(L"m_CriticalSectionEffect\n");
 		DelCS(&m_CriticalSectionEffect);
-		OutputDebugStr(L"m_CriticalSectionSound\n");
+		//OutputDebugStr(L"m_CriticalSectionSound\n");
 		DelCS(&m_CriticalSectionSound);
-		OutputDebugStr(L"m_CriticalSectionLua\n");
+		//OutputDebugStr(L"m_CriticalSectionLua\n");
 		DelCS(&m_CriticalSectionLua);
-		OutputDebugStr(L"m_CriticalSectionLog\n");
+		//OutputDebugStr(L"m_CriticalSectionLog\n");
 		DelCS(&m_CriticalSectionLog);
 #if !USE_DINPUT
 		DelCS(&m_CriticalSectionInput);
