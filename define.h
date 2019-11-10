@@ -3,6 +3,7 @@
 #ifndef H_TYPE_CLASS___
 #define H_TYPE_CLASS___
 
+#define MAX_SHOT_POWER 10
 #define GALLERY_TEAM_NO 1
 #define BLT_DEFAULT_HITRANGE 10
 #define OBJECT_DROP_SPEED 10
